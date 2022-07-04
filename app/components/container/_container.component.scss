@@ -1,0 +1,7 @@
+@import '../../styles/variables';
+
+.container {
+  max-width: 840px;
+  margin: auto;
+  padding: $gutter-size;
+}

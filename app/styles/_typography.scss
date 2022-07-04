@@ -1,0 +1,62 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'notosans';
+  src: url('../assets/fonts/notosans-bold-webfont.woff2') format('woff2'),
+       url('../assets/fonts/notosans-bold-webfont.woff') format('woff');
+  font-weight: $font-weight-bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'notosans';
+  src: url('../assets/fonts/notosans-regular-webfont.woff2') format('woff2'),
+       url('../assets/fonts/notosans-regular-webfont.woff') format('woff');
+  font-weight: $font-weight-normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'notosans';
+  src: url('../assets/fonts/notosans-light-webfont.woff2') format('woff2'),
+       url('../assets/fonts/notosans-light-webfont.woff') format('woff');
+  font-weight: $font-weight-light;
+  font-style: normal;
+  font-display: swap;
+}
+
+%heading {
+  margin-top: 0;
+  margin-bottom: $headings-margin-bottom;
+  font-weight: $font-weight-light;
+  line-height: $line-height-base;
+  color: $headings-color;
+}
+
+h1 {
+  @extend %heading;
+  font-size: 35px;
+}
+
+h2 {
+  @extend %heading;
+  font-size: 30px;
+}
+
+h3 {
+  @extend %heading;
+  font-size: 18px;
+}
+
+h4 {
+  @extend %heading;
+  font-size: 16px;
+  margin-bottom: 23px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: $paragraph-margin-bottom;
+}
