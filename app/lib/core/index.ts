@@ -1,3 +1,3 @@
-export { BaseComponent } from './base.component';
-export { bootstrap } from './core';
-export { PubSub, EventsTypes } from './pubsub';
+export * from './base.component';
+export * from './core';
+export * from './pubsub';

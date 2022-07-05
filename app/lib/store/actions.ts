@@ -1,9 +1,11 @@
+import { Store } from "./store";
+
 export enum ActionTypes {
-  Action = 'action',
+  Navigate = 'navigate',
 }
 
 export const actions = {
-  action(context: any, payload: any) {
-    context.commit(ActionTypes.Action, payload);
+  navigate(context: Store, payload: string) {
+    context.commit(ActionTypes.Navigate, payload);
   }
 };

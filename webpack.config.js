@@ -31,7 +31,8 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              sourceMap: true
+              sourceMap: true,
+              url: false
             }
           },
           {
@@ -47,7 +48,13 @@ module.exports = {
         exclude: /\.component.(s(a|c)ss)$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              url: false
+            }
+          },
           {
             loader: 'sass-loader',
             options: {
@@ -61,7 +68,8 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, 'dist'),
     compress: true,
-    port: 8080
+    port: 8080,
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({

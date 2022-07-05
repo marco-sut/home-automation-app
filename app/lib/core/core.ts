@@ -1,6 +1,6 @@
 import { HomeAutomationApp } from "../../app";
-import { 
-  ContainerComponent
+import {
+  HomeComponent, LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent
 } from "../../components";
 
 interface ComponentRegistry {
@@ -11,11 +11,27 @@ interface ComponentRegistry {
 const components: ComponentRegistry[] = [
   {
     tagName: 'home-automation-app',
-    component: HomeAutomationApp
+    component: HomeAutomationApp,
   },
   {
-    tagName: 'app-container',
-    component: ContainerComponent
+    tagName: 'app-home',
+    component: HomeComponent,
+  },
+  {
+    tagName: 'app-login',
+    component: LoginComponent,
+  },
+  {
+    tagName: 'app-rooms',
+    component: RoomsComponent,
+  },
+  {
+    tagName: 'app-room-settings',
+    component: RoomSettingsComponent,
+  },
+  {
+    tagName: 'app-404',
+    component: NotFoundComponent,
   }
 ]
 
