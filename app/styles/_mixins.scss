@@ -1,0 +1,7 @@
+@import './variables';
+
+@mixin mq($mq-breakpoint) {
+  @media (min-width: #{map-get($breakpoints, $mq-breakpoint)}) {
+    @content;
+  }
+}

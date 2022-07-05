@@ -1,12 +1,20 @@
-$font-family-base: 'notosans';
+$font-family-base: 'notosans', 'Helvetica Neue', Helvetica, sans-serif;
 $font-size-base: 1em;
+$font-size-small: 0.75em;
 $font-weight-light: 200;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
 $body-bg: rgb(255, 255, 255);
-$headings-margin-bottom: 1.5em;
+$headings-margin-bottom: 1em;
 $line-height-base: 1.5;
 $headings-color: rgb(44, 44, 44);
 $body-text-color: rgb(44, 44, 44);
+$form-text-color: rgb(116, 116, 116);
 $paragraph-margin-bottom: 1.5em;
 
+$breakpoints: (
+  'sm': 510px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);

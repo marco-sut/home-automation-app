@@ -1,7 +1,8 @@
 import { HomeAutomationApp } from "../../app";
 import {
-  HomeComponent, LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent
+  LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent, RoomsListComponent
 } from "../../components";
+import { HeaderComponent, LayoutComponent, InputComponent, ButtonComponent } from "../ui";
 
 interface ComponentRegistry {
   tagName: string;
@@ -14,10 +15,6 @@ const components: ComponentRegistry[] = [
     component: HomeAutomationApp,
   },
   {
-    tagName: 'app-home',
-    component: HomeComponent,
-  },
-  {
     tagName: 'app-login',
     component: LoginComponent,
   },
@@ -26,16 +23,36 @@ const components: ComponentRegistry[] = [
     component: RoomsComponent,
   },
   {
+    tagName: 'app-rooms-list',
+    component: RoomsListComponent,
+  },
+  {
     tagName: 'app-room-settings',
     component: RoomSettingsComponent,
   },
   {
     tagName: 'app-404',
     component: NotFoundComponent,
-  }
+  },
+  {
+    tagName: 'app-header',
+    component: HeaderComponent,
+  },
+  {
+    tagName: 'app-layout',
+    component: LayoutComponent,
+  },
+  {
+    tagName: 'app-input',
+    component: InputComponent,
+  },
+  {
+    tagName: 'app-button',
+    component: ButtonComponent,
+  },
 ]
 
-export const bootstrap = () => {
+export const registerComponents = () => {
   components.forEach(component => {
     window.customElements.define(component.tagName, component.component);
   });

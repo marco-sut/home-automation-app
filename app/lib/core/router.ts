@@ -1,5 +1,5 @@
-import { store } from "./lib/store";
-import { ActionTypes } from "./lib/store/actions";
+import { store } from "../store";
+import { ActionTypes } from "../store/actions";
 
 const routes = [
   {
@@ -18,6 +18,10 @@ const routes = [
     path: '/room-settings',
     template: '<app-room-settings></app-room-settings>',
   },
+  {
+    path: '**',
+    template: '<app-404></app-404>',
+  },
 ];
 
 function dispatchNavigationOnRouteChange() {
@@ -26,15 +30,16 @@ function dispatchNavigationOnRouteChange() {
   if (route?.template) {
     store.dispatch(ActionTypes.Navigate, route.template);
   } else {
-    store.dispatch(ActionTypes.Navigate, '<app-404></app-404>');
+    store.dispatch(ActionTypes.Navigate, routes[routes.length - 1].template);
   }
 }
 
-export function init() {
+export function initRouter() {
   window.addEventListener('popstate', dispatchNavigationOnRouteChange);
   window.addEventListener('DOMContentLoaded', dispatchNavigationOnRouteChange);
 }
 
-
-// history.pushState(null, null, '/rooms');
-// dispatchEvent(new PopStateEvent('popstate'));
+export function navigateTo({data, url}: { data: any, url?: string | URL | null }) {
+  history.pushState(data, '', url);
+  dispatchEvent(new PopStateEvent('popstate'));
+}

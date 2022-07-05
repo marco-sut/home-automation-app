@@ -1,0 +1,32 @@
+@import "../../../../styles/variables";
+
+.label {
+  display: block;
+  font-size: $font-size-small;
+  color: $form-text-color;
+}
+
+.input[type="text"] {
+  border-radius: 0;
+  border-width: 0 0 1px;
+  padding-left: 0;
+  padding-right: 0;
+  resize: none;
+  overflow-y: hidden;
+  color: $form-text-color;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #eaeaea;
+  width: 100%;
+  line-height: 1.15;
+  height: 28px;
+  padding-bottom: 0;
+  padding-top: 0;
+  font-size: 1.1875em;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: #378ef0;
+    box-shadow: 0 1px 0 #378ef0;
+  }
+}
