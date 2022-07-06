@@ -1,6 +1,26 @@
-@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  min-width: 80vw;
+  margin: auto;
+}
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  @include mq('xl') {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-width: 55vw;
+  }
+}
+
+.col {
+  padding: 2em;
+  text-align: center;
+
+  @include mq('xl') {
+    padding: 5em;
+    text-align: left;
+  }
 }

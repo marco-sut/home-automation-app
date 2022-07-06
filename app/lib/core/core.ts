@@ -1,8 +1,9 @@
 import { HomeAutomationApp } from "../../app";
 import {
-  LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent, RoomsListComponent
+  HomeComponent,
+  LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent, RoomsListComponent, ThermostatComponent
 } from "../../components";
-import { HeaderComponent, LayoutComponent, InputComponent, ButtonComponent } from "../ui";
+import { HeaderComponent, LayoutComponent, InputComponent, ButtonComponent, BedroomIconComponent, KidsBedroomIconComponent, KitchenIconComponent, LivingRoomIconComponent, ThermostatIconComponent, LightBulbIconComponent, PlusIconComponent, MinusIconComponent } from "../ui";
 
 interface ComponentRegistry {
   tagName: string;
@@ -13,6 +14,10 @@ const components: ComponentRegistry[] = [
   {
     tagName: 'home-automation-app',
     component: HomeAutomationApp,
+  },
+  {
+    tagName: 'app-home',
+    component: HomeComponent,
   },
   {
     tagName: 'app-login',
@@ -29,6 +34,10 @@ const components: ComponentRegistry[] = [
   {
     tagName: 'app-room-settings',
     component: RoomSettingsComponent,
+  },
+  {
+    tagName: 'app-room-settings-thermostat',
+    component: ThermostatComponent,
   },
   {
     tagName: 'app-404',
@@ -49,6 +58,38 @@ const components: ComponentRegistry[] = [
   {
     tagName: 'app-button',
     component: ButtonComponent,
+  },
+  {
+    tagName: 'app-icon-kitchen',
+    component: KitchenIconComponent,
+  },
+  {
+    tagName: 'app-icon-living-room',
+    component: LivingRoomIconComponent,
+  },
+  {
+    tagName: 'app-icon-bedroom',
+    component: BedroomIconComponent,
+  },
+  {
+    tagName: 'app-icon-kids-bedroom',
+    component: KidsBedroomIconComponent,
+  },
+  {
+    tagName: 'app-icon-thermostat',
+    component: ThermostatIconComponent,
+  },
+  {
+    tagName: 'app-icon-light-bulb',
+    component: LightBulbIconComponent,
+  },
+  {
+    tagName: 'app-icon-plus',
+    component: PlusIconComponent,
+  },
+  {
+    tagName: 'app-icon-minus',
+    component: MinusIconComponent,
   },
 ]
 

@@ -1,7 +1,7 @@
-import { actions } from './actions';
-import { reducers } from './reducers';
-import { state } from './state';
-import { Store } from './store';
+import { actions } from "./actions";
+import { reducers } from "./reducers";
+import { state } from "./state";
+import { Store } from "./store";
 
 export const store = new Store({
   actions,

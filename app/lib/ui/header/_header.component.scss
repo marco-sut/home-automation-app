@@ -1,1 +1,10 @@
-@import '../../styles/variables';
+@import '../../../styles/variables';
+
+.subtitle {
+  color: $subtitle-text-color;
+  font-weight: $font-weight-bold;
+}
+
+.logo {
+  margin-bottom: 1.5em;
+}

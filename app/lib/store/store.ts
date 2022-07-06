@@ -1,7 +1,7 @@
-import { PubSub, EventsTypes } from '../core/pubsub';
-import { AppState } from './state';
-import { ActionTypes } from './actions';
-import { MutationTypes } from './reducers';
+import { PubSub, EventsTypes } from "../core/pubsub";
+import { AppState } from "./state";
+import { ActionTypes } from "./actions";
+import { MutationTypes } from "./reducers";
 
 export class Store {
   actions = {};

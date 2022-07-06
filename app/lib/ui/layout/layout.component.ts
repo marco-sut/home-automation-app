@@ -16,14 +16,16 @@ export class LayoutComponent extends BaseComponent {
 
   render(): string {
     return `
-      <main class="${styles['container']}">
-        <section class="${styles['col']}">
-          ${this.leftCol}
-        <section>
-        <section class="${styles['col']}">
-          ${this.rightCol}
-        <section>
-      </main>
+      <div class="${styles['wrapper']}">
+        <main class="${styles['container']}">
+          <section class="${styles['col']}">
+            ${this.leftCol}
+          </section>
+          <section class="${styles['col']}">
+            ${this.rightCol}
+          </section>
+        </main>
+      </div>
     `;
   }
 }

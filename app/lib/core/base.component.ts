@@ -1,5 +1,5 @@
-import { store } from '../store';
-import { EventsTypes } from './pubsub';
+import { store } from "../store";
+import { EventsTypes } from "./pubsub";
 
 export abstract class BaseComponent extends HTMLElement {
 

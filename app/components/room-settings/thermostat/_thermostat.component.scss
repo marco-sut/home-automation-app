@@ -1,0 +1,43 @@
+@import '../../../styles/mixins';
+
+.thermostat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mq('sm') {
+    max-width: 50vw;
+  }
+
+  @include mq('xl') {
+    max-width: 28vw;
+  }
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 4em;
+    color: $color-blue;
+    font-weight: $font-weight-normal;
+
+    @include mq('xl') {
+      font-size: 6em;
+    }
+  }
+
+  &__controls {
+    margin-top: -2.5em;
+
+    button {
+      background: none;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

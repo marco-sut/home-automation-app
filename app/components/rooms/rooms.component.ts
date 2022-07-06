@@ -7,7 +7,7 @@ export class RoomsComponent extends BaseComponent {
 
   get renderLeftCol() {
     return `
-      <app-header pageTitle='Welcome Erika Mustermann to your Adobe Home' pageSubtitle='Select a room'></app-header>
+      <app-header pageTitle='<div>Welcome</div> <div>Erika Mustermann</div> <div>to Adobe Home</div>' pageSubtitle='Select a room'></app-header>
     `;
   }
 

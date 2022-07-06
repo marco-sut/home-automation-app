@@ -1,1 +1,22 @@
 @import '../../styles/variables';
+
+.links-list {
+  > li {
+    margin-bottom: 0.5em;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__item-text {
+    margin-left: 0.5em;
+  }
+
+  .active {
+    .links-list__item-text {
+      border-bottom: 1px solid $color-blue;
+    }
+  }
+}

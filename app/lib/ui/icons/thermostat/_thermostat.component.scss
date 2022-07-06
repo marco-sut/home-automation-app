@@ -1,0 +1,5 @@
+@import '../../../../styles/mixins';
+
+.icon {
+  @include circle(#FEB6B3, #FF0101, #FF413D);
+}

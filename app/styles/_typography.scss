@@ -1,9 +1,9 @@
-@import 'variables';
+@import 'mixins';
 
 @font-face {
   font-family: 'notosans';
   src: url('/assets/fonts/notosans-bold-webfont.woff2') format('woff2'),
-       url('/assets/fonts/notosans-bold-webfont.woff') format('woff');
+    url('/assets/fonts/notosans-bold-webfont.woff') format('woff');
   font-weight: $font-weight-bold;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 @font-face {
   font-family: 'notosans';
   src: url('/assets/fonts/notosans-regular-webfont.woff2') format('woff2'),
-       url('/assets/fonts/notosans-regular-webfont.woff') format('woff');
+    url('/assets/fonts/notosans-regular-webfont.woff') format('woff');
   font-weight: $font-weight-normal;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 @font-face {
   font-family: 'notosans';
   src: url('/assets/fonts/notosans-light-webfont.woff2') format('woff2'),
-       url('/assets/fonts/notosans-light-webfont.woff') format('woff');
+    url('/assets/fonts/notosans-light-webfont.woff') format('woff');
   font-weight: $font-weight-light;
   font-style: normal;
   font-display: swap;
@@ -36,13 +36,23 @@
 }
 
 h1 {
+  font-size: 2.5em;
+
   @extend %heading;
-  font-size: 3em;
+
+  @include mq('xl') {
+    font-size: 3.2em;
+  }
 }
 
 h2 {
+  font-size: 1.8em;
+
   @extend %heading;
-  font-size: 2.2em;
+
+  @include mq('xl') {
+    font-size: 2.2em;
+  }
 }
 
 h3 {
@@ -58,4 +68,21 @@ h4 {
 p {
   margin-top: 0;
   margin-bottom: $paragraph-margin-bottom;
+}
+
+a {
+  color: $color-blue;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
