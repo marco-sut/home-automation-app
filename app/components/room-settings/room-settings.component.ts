@@ -18,12 +18,21 @@ export class RoomSettingsComponent extends BaseComponent {
     `;
   }
 
+  // get renderRightCol() {
+  //   return `
+  //     <app-room-settings-lights></app-room-settings-lights>
+  //   `;
+  // }
+
   get linksList() {
     return `
       <ul class=${styles['links-list']}>
-        <li><a href=# class=${styles['active']}><app-icon-thermostat></app-icon-thermostat> <span class=${styles['links-list__item-text']}>Thermostat</span></a></li>
-        <li><a href=#><app-icon-light-bulb></app-icon-light-bulb> <span class=${styles['links-list__item-text']}>Lights</span></a></li>
+        <li><a href=#><app-icon-thermostat></app-icon-thermostat> <span class=${styles['links-list__item-text']}>Thermostat</span></a></li>
+        <li><a href=# class=${styles['active']}><app-icon-light-bulb></app-icon-light-bulb> <span class=${styles['links-list__item-text']}>Lights</span></a></li>
       </ul>
+      <div class=${styles['back-button']}>
+        <app-button type=button label=Back></app-button>
+      </div>
     `;
   }
 

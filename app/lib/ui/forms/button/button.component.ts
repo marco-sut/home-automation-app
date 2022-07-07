@@ -10,13 +10,17 @@ export class ButtonComponent extends BaseComponent {
     return this.getAttribute('label');
   }
 
+  get theme() {
+    return this.getAttribute('theme') ?? 'primary';
+  }
+
   connectedCallback() {
     this.innerHTML = this.render();
   }
 
   render() {
     return `
-      <button class="${styles['button']}" type="${this.type}">${this.label}</button>
+      <button class="${styles['button']} ${styles[this.theme]}" type="${this.type}">${this.label}</button>
     `;
   };
 }

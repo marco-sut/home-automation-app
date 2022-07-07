@@ -1,6 +1,7 @@
 import { HomeAutomationApp } from "../../app";
 import {
   HomeComponent,
+  LightsComponent,
   LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent, RoomsListComponent, ThermostatComponent
 } from "../../components";
 import { HeaderComponent, LayoutComponent, InputComponent, ButtonComponent, BedroomIconComponent, KidsBedroomIconComponent, KitchenIconComponent, LivingRoomIconComponent, ThermostatIconComponent, LightBulbIconComponent, PlusIconComponent, MinusIconComponent } from "../ui";
@@ -38,6 +39,10 @@ const components: ComponentRegistry[] = [
   {
     tagName: 'app-room-settings-thermostat',
     component: ThermostatComponent,
+  },
+  {
+    tagName: 'app-room-settings-lights',
+    component: LightsComponent,
   },
   {
     tagName: 'app-404',

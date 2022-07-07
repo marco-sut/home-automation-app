@@ -8,19 +8,20 @@
 }
 
 .container {
+  flex-basis: 75%;
+
   @include mq('xl') {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-width: 55vw;
   }
 }
 
 .col {
-  padding: 2em;
   text-align: center;
+  padding: 2em;
 
   @include mq('xl') {
-    padding: 5em;
     text-align: left;
+    padding: 5em;
   }
 }
