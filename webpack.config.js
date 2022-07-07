@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.js', '.scss']
   },
@@ -85,6 +87,11 @@ module.exports = {
           context: 'app/assets',
           from: '**',
           to: 'assets'
+        },
+        {
+          context: 'mocks',
+          from: 'mockServiceWorker.js',
+          to: ''
         }
       ]
     })
