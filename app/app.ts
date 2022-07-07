@@ -15,5 +15,5 @@ export class HomeAutomationApp extends BaseComponent {
 
   render() {
     return this.store.state.activatedRoute;
-  };
+  }
 }

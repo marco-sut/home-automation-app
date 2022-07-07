@@ -22,5 +22,5 @@ export class ButtonComponent extends BaseComponent {
     return `
       <button class="${styles['button']} ${styles[this.theme]}" type="${this.type}">${this.label}</button>
     `;
-  };
+  }
 }

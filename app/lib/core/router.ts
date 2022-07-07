@@ -25,7 +25,7 @@ const routes = [
 ];
 
 function dispatchNavigationOnRouteChange() {
-  let route = routes.find(route => route.path == window.location.pathname);
+  const route = routes.find(route => route.path == window.location.pathname);
 
   if (route?.template) {
     store.dispatch(ActionTypes.Navigate, route.template);

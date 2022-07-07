@@ -19,5 +19,5 @@ export class InputComponent extends BaseComponent {
       <label class="${styles['label']}" for="${this.inputId}">${this.inputLabel}</label> 
       <input class="${styles['input']}" type="text" id="${this.inputId}" name="${this.inputId}">
     `;
-  };
+  }
 }

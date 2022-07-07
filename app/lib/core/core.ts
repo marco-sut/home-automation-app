@@ -8,6 +8,7 @@ import { HeaderComponent, LayoutComponent, InputComponent, ButtonComponent, Bedr
 
 interface ComponentRegistry {
   tagName: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: any;
 }
 

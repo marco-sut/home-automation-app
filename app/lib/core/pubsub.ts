@@ -6,7 +6,7 @@ export class PubSub {
   events = {};
 
   subscribe(event: EventsTypes, callback: () => void) {
-    if (!this.events.hasOwnProperty(event)) {
+    if (!Object.prototype.hasOwnProperty.call(this.events, event)) {
       this.events[event] = [];
     }
 
@@ -14,10 +14,11 @@ export class PubSub {
   }
 
   publish(event: EventsTypes, payload = {}) {
-    if (!this.events.hasOwnProperty(event)) {
+    if (!Object.prototype.hasOwnProperty.call(this.events, event)) {
       return [];
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.events[event].map((callback: (payload: any) => void) => callback(payload));
   }
 }

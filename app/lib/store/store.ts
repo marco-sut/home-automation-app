@@ -23,11 +23,11 @@ export class Store {
     this.state = state;
   }
 
-  dispatch(actionKey: ActionTypes, payload: any) {
+  dispatch(actionKey: ActionTypes, payload: unknown) {
     this.actions[actionKey](this, payload);
   }
 
-  commit(mutationKey: MutationTypes, payload: any) {
+  commit(mutationKey: MutationTypes, payload: unknown) {
     this.state = this.reducers[mutationKey](this.state, payload);
   }
 }

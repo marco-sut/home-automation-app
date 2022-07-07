@@ -7,7 +7,7 @@ export abstract class BaseComponent extends HTMLElement {
 
   abstract render(): string;
 
-  protected connectToStore(callback?: Function) {
+  protected connectToStore(callback?: () => undefined) {
     if (typeof callback !== 'undefined') {
       store.events.subscribe(EventsTypes.StateChange, () => callback());
     }
