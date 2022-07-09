@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../lib/core";
+import { BaseComponent } from "../../lib";
 
 export class NotFoundComponent extends BaseComponent {
   protected connectedCallback(): void {

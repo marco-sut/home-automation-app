@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../lib/core";
+import { BaseComponent } from "../../lib";
 import styles from './_room-settings.component.scss';
 
 export class RoomSettingsComponent extends BaseComponent {
@@ -12,17 +12,17 @@ export class RoomSettingsComponent extends BaseComponent {
     `;
   }
 
-  get renderRightCol() {
-    return `
-      <app-room-settings-thermostat></app-room-settings-thermostat>
-    `;
-  }
-
   // get renderRightCol() {
   //   return `
-  //     <app-room-settings-lights></app-room-settings-lights>
+  //     <app-room-settings-thermostat></app-room-settings-thermostat>
   //   `;
   // }
+
+  get renderRightCol() {
+    return `
+      <app-room-settings-lights></app-room-settings-lights>
+    `;
+  }
 
   get linksList() {
     return `

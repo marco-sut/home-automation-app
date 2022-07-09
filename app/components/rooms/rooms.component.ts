@@ -1,13 +1,20 @@
-import { BaseComponent } from "../../lib/core";
+import { BaseComponent, Store } from "../../lib";
 
 export class RoomsComponent extends BaseComponent {
+  private store: Store;
+
+  constructor() {
+    super();
+    this.store = this.connectToStore();
+  }
+
   protected connectedCallback(): void {
     this.innerHTML = this.render();
   }
 
   get renderLeftCol() {
     return `
-      <app-header pageTitle='<div>Welcome</div> <div>Erika Mustermann</div> <div>to Adobe Home</div>' pageSubtitle='Select a room'></app-header>
+      <app-header pageTitle='<div>Welcome</div> <div>${this.store.state.user?.name}</div> <div>to Adobe Home</div>' pageSubtitle='Select a room'></app-header>
     `;
   }
 

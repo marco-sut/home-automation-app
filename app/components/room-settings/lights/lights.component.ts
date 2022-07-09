@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../../lib/core";
+import { BaseComponent } from "../../../lib";
 import styles from "./_lights.component.scss";
 
 export class LightsComponent extends BaseComponent {
@@ -32,6 +32,13 @@ export class LightsComponent extends BaseComponent {
         </li>
         <li class="${styles['lights-list__item']}">
           <p class="${styles['lights-list__title']}">Additional light</p>
+          <div class="${styles['lights-list__btn-group']}">
+            <app-button type="button" label="Off" theme="secondary"></app-button>
+            <app-button type="button" label="On"></app-button>
+          </div>
+        </li>
+        <li class="${styles['lights-list__item']}">
+          <p class="${styles['lights-list__title']}">Night light</p>
           <div class="${styles['lights-list__btn-group']}">
             <app-button type="button" label="Off" theme="secondary"></app-button>
             <app-button type="button" label="On"></app-button>

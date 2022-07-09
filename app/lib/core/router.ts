@@ -3,8 +3,8 @@ import { ActionTypes } from "../store/actions";
 
 const routes = [
   {
-    path: '/',
-    template: '<app-home></app-home>',
+    path: '/authenticate',
+    template: '<app-authenticate></app-authenticate>',
   },
   {
     path: '/login',
@@ -39,7 +39,7 @@ export function initRouter() {
   window.addEventListener('DOMContentLoaded', dispatchNavigationOnRouteChange);
 }
 
-export function navigateTo({data, url}: { data: any, url?: string | URL | null }) {
+export function navigateTo(data: string | object, url: string | URL | null) {
   history.pushState(data, '', url);
   dispatchEvent(new PopStateEvent('popstate'));
 }

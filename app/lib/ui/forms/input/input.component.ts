@@ -17,7 +17,7 @@ export class InputComponent extends BaseComponent {
   render() {
     return `
       <label class="${styles['label']}" for="${this.inputId}">${this.inputLabel}</label> 
-      <input class="${styles['input']}" type="text" id="${this.inputId}" name="${this.inputId}">
+      <input class="${styles['input']}" type="text" id="${this.inputId}" name="${this.inputId}" autocomplete="off">
     `;
   }
 }

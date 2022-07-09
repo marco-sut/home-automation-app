@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../../lib/core";
+import { BaseComponent } from "../../../lib";
 import styles from "./_thermostat.component.scss";
 
 export class ThermostatComponent extends BaseComponent {

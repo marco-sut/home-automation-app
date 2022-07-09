@@ -1,6 +1,6 @@
 import { HomeAutomationApp } from "../../app";
 import {
-  HomeComponent,
+  AuthenticateComponent,
   LightsComponent,
   LoginComponent, NotFoundComponent, RoomsComponent, RoomSettingsComponent, RoomsListComponent, ThermostatComponent
 } from "../../components";
@@ -18,8 +18,8 @@ const components: ComponentRegistry[] = [
     component: HomeAutomationApp,
   },
   {
-    tagName: 'app-home',
-    component: HomeComponent,
+    tagName: 'app-authenticate',
+    component: AuthenticateComponent,
   },
   {
     tagName: 'app-login',

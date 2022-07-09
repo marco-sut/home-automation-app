@@ -1,5 +1,4 @@
-import { BaseComponent } from "./lib/core";
-import { Store } from "./lib/store/store";
+import { BaseComponent, Store, apiService } from "./lib";
 
 export class HomeAutomationApp extends BaseComponent {
   private store: Store;
@@ -9,8 +8,22 @@ export class HomeAutomationApp extends BaseComponent {
     this.store = this.connectToStore(this.connectedCallback.bind(this));
   }
 
-  connectedCallback() {
-    this.innerHTML = this.render();
+  async connectedCallback() {
+    if (this.store.state.user?.loggedIn) {
+      this.innerHTML = this.loading();
+      try {
+        await apiService.sync();
+      } catch (err) {
+        throw new Error(`Something went wrong syncing the devices: ${err}`);
+      }
+      this.innerHTML = this.render();
+    } else {
+      this.innerHTML = this.render();
+    }
+  }
+
+  loading() {
+    return `<h3>Loading...</h3>`;
   }
 
   render() {

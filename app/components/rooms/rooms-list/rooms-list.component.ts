@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../../lib/core";
+import { BaseComponent } from "../../../lib";
 import styles from "./_rooms-list.component.scss";
 
 export class RoomsListComponent extends BaseComponent {

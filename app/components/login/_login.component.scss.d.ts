@@ -5,6 +5,7 @@ interface CssExports {
   'button-wrapper': string;
   'card': string;
   'card__title': string;
+  'error': string;
   'mobile-logo': string;
   'wrapper': string;
 }
