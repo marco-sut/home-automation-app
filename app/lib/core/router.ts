@@ -28,9 +28,9 @@ function dispatchNavigationOnRouteChange() {
   const route = routes.find(route => route.path == window.location.pathname);
 
   if (route?.template) {
-    store.dispatch(ActionTypes.Navigate, route.template);
+    store.dispatch<string>(ActionTypes.Navigate, route.template);
   } else {
-    store.dispatch(ActionTypes.Navigate, routes[routes.length - 1].template);
+    store.dispatch<string>(ActionTypes.Navigate, routes[routes.length - 1].template);
   }
 }
 

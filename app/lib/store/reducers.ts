@@ -1,6 +1,7 @@
 import { AppState } from "./state";
 import { ActionTypes } from "./actions";
-import { User } from "./model";
+import { Device, User } from "./model";
+import { distinct } from "../core";
 
 export type MutationTypes = ActionTypes;
 
@@ -10,5 +11,8 @@ export const reducers = {
   },
   setUser(state: AppState, payload: User): AppState {
     return { ...state, user: payload };
+  },
+  syncDevices(state: AppState, payload: Device[]): AppState {
+    return { ...state, devices: payload, rooms: distinct<Device>(payload, 'room', 'ALL') };
   }
 };

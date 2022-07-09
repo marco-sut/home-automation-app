@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from "./_kitchen.component.scss";
 
 export class KitchenIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

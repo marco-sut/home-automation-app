@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from "./_light-bulb.component.scss";
 
 export class LightBulbIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

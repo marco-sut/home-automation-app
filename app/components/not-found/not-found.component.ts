@@ -1,7 +1,7 @@
 import { BaseComponent } from "../../lib";
 
 export class NotFoundComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

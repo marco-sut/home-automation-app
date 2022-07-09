@@ -7,7 +7,7 @@ export class LoginComponent extends BaseComponent {
   private emailRegEx = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   private passwordMinLength = 4;
 
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
     this.attachHandlers();
   }

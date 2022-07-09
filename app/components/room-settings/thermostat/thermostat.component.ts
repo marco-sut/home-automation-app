@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../lib";
 import styles from "./_thermostat.component.scss";
 
 export class ThermostatComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

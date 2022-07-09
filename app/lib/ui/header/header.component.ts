@@ -10,7 +10,7 @@ export class HeaderComponent extends BaseComponent {
     return this.getAttribute('pageSubtitle');
   }
 
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

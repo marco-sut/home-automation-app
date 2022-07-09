@@ -8,7 +8,7 @@ export class RoomsComponent extends BaseComponent {
     this.store = this.connectToStore();
   }
 
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from './_living-room.component.scss';
 
 export class LivingRoomIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

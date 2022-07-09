@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from "./_minus.component.scss";
 
 export class MinusIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

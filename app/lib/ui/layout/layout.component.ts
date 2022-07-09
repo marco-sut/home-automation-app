@@ -10,7 +10,7 @@ export class LayoutComponent extends BaseComponent {
     return this.getAttribute('rightCol');
   }
 
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

@@ -1,30 +1,14 @@
+import { Device, TraitCommand } from "../store/model";
+
 export enum Intent {
   SYNC = 'action.devices.SYNC',
   QUERY = 'action.devices.query',
   EXECUTE = 'action.devices.execute',
 }
 
-export enum DeviceType {
-  LIGHT = 'action.devices.types.LIGHT',
-  THERMOSTAT = 'action.devices.types.THERMOSTAT',
-}
-
-export enum TraitCommand {
-  ON_OFF = 'action.devices.types.OnOff',
-  TEMPERATURE_SETTING = 'action.devices.types.TemperatureSetting',
-}
-
 export type SyncPayload = {
   requestId: string;
   intent: Intent.SYNC;
-};
-
-export type Device = {
-  id: string;
-  type: DeviceType;
-  traits: TraitCommand[];
-  name: string;
-  room: string;
 };
 
 export type SyncResponse = {

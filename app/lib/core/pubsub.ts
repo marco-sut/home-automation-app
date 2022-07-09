@@ -1,12 +1,12 @@
 export enum EventsTypes {
-  StateChange = 'stateChange'
+  StateChange = 'stateChange',
 }
 
 export class PubSub {
   events = {};
 
   subscribe(event: EventsTypes, callback: () => void) {
-    if (!Object.prototype.hasOwnProperty.call(this.events, event)) {
+    if (!(event in this.events)) {
       this.events[event] = [];
     }
 
@@ -14,11 +14,10 @@ export class PubSub {
   }
 
   publish(event: EventsTypes, payload = {}) {
-    if (!Object.prototype.hasOwnProperty.call(this.events, event)) {
+    if (!(event in this.events)) {
       return [];
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.events[event].map((callback: (payload: any) => void) => callback(payload));
+    return this.events[event].forEach((callback: (payload: unknown) => void) => callback(payload));
   }
 }

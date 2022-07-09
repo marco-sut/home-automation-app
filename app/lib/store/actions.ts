@@ -1,9 +1,10 @@
-import { User } from "./model";
+import { Device, User } from "./model";
 import { Store } from "./store";
 
 export enum ActionTypes {
   Navigate = 'navigate',
-  SetUser = 'setUser'
+  SetUser = 'setUser',
+  SyncDevices = 'syncDevices',
 }
 
 export const actions = {
@@ -12,5 +13,8 @@ export const actions = {
   },
   setUser(context: Store, payload: User) {
     context.commit(ActionTypes.SetUser, payload);
+  },
+  syncDevices(context: Store, payload: Device[]) {
+    context.commit(ActionTypes.SyncDevices, payload);
   },
 };

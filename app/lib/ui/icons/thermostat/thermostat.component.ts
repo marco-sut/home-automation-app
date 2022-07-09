@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from "./_thermostat.component.scss";
 
 export class ThermostatIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

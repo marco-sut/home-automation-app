@@ -2,7 +2,7 @@ import { BaseComponent } from "../../lib";
 import styles from './_room-settings.component.scss';
 
 export class RoomSettingsComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

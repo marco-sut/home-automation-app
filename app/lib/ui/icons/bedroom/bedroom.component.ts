@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from './_bedroom.component.scss';
 
 export class BedroomIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 

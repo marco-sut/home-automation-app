@@ -1,5 +1,3 @@
-// CODE TAKEN FROM HERE https://github.com/aaronpk/pkce-vanilla-js/blob/master/index.html
-
 export function generateRandomString() {
   const array = new Uint32Array(28);
   window.crypto.getRandomValues(array);
@@ -30,7 +28,7 @@ export async function pkceChallengeFromVerifier(verifier: string) {
   return base64urlencode(hashed);
 }
 
-export function parseJwt(token: string) {
+export function parseJwt(token: string): object {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
@@ -38,4 +36,8 @@ export function parseJwt(token: string) {
   }).join(''));
 
   return JSON.parse(jsonPayload);
+}
+
+export function distinct<T>(array: T[], key: string, exclude?: string) {
+  return [...new Set(array.map(item => item[key] !== exclude ? item[key] : undefined).filter(Boolean))];
 }

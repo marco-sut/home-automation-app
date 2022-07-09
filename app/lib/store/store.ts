@@ -23,7 +23,7 @@ export class Store {
     this.state = state;
   }
 
-  dispatch(actionKey: ActionTypes, payload: unknown) {
+  dispatch<T>(actionKey: ActionTypes, payload: T) {
     this.actions[actionKey](this, payload);
   }
 

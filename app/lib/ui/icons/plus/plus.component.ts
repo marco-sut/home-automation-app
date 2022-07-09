@@ -2,7 +2,7 @@ import { BaseComponent } from "../../../core";
 import styles from "./_plus.component.scss";
 
 export class PlusIconComponent extends BaseComponent {
-  protected connectedCallback(): void {
+  protected connectedCallback() {
     this.innerHTML = this.render();
   }
 
