@@ -13,7 +13,7 @@
 ## About
 
 This proof of concept aims to showcase a possible approach for a Home Automation app. I've written this code from scratch, the very most of the code has not been copied from other solutions.
-Some features have only been sketched (e.g. loading UI, error message UI) for matter of time. I put more focus on the big picture rather than implementation details.
+Some features have only been sketched (e.g. loading UI, error message UI) for matter of time. I've put more focus on the big picture rather than implementation details.
 
 ### What technologies have I used for this PoC?
 -	Web Components
@@ -84,3 +84,7 @@ If this is the case it performs a devices sync operation by calling the `/sync` 
 So after the sync operation a list of links with rooms are presented to the user and by clicking on them a redirection is performed to `/room-settings?room=room_name` where the details of the devices for that particular room is shown, and the user has the possibility to turn on/off the lights of the room and adjust the temperature. 
 
 The device details data is fetched from the `/query` endpoint and the action of turning on/off a light or adjust the temperature is performed via the `/execute` api.
+
+### Browser support
+
+I've tested it on Chrome and Edge latest version, but might be working also in other browsers like Safari and Firefox.
