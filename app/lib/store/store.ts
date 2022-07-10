@@ -1,21 +1,14 @@
 import { PubSub, EventsTypes } from "../core/pubsub";
 import { AppState } from "./state";
 import { ActionTypes } from "./actions";
-import { MutationTypes } from "./reducers";
+import { AppStateEvent } from "./reducers";
 
 export class Store {
-  actions = {};
-  reducers = {};
-  events = new PubSub();
+  private actions = {};
+  private reducers = {};
+  private events = new PubSub();
 
-  get state(): AppState {
-    return this._state;
-  }
-  set state(s: AppState) {
-    this._state = s;
-    this.events.publish(EventsTypes.StateChange, s);
-  }
-  private _state: AppState;
+  state: AppState;
 
   constructor({ actions, reducers, state }) {
     this.actions = actions;
@@ -23,11 +16,16 @@ export class Store {
     this.state = state;
   }
 
-  dispatch<T>(actionKey: ActionTypes, payload: T) {
-    this.actions[actionKey](this, payload);
+  private setState(appStateEvent: AppStateEvent) {
+    this.state = appStateEvent.state;
+    this.events.publish(appStateEvent.eventType, this.state);
   }
 
-  commit(mutationKey: MutationTypes, payload: unknown) {
-    this.state = this.reducers[mutationKey](this.state, payload);
+  dispatch<T>(actionKey: ActionTypes, payload: T, eventType?: EventsTypes) {
+    this.actions[actionKey](this, payload, eventType ?? EventsTypes.StateChange);
+  }
+
+  commit(mutationKey: ActionTypes, payload: unknown, eventType: EventsTypes) {
+    this.setState(this.reducers[mutationKey](this.state, payload, eventType));
   }
 }

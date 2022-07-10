@@ -20,3 +20,9 @@ export type Device = {
   name: string;
   room: string;
 };
+
+export type DevicesData = Record<string, {
+  on?: boolean;
+  temperatureSetpoint?: number;
+  online: true;
+}>;

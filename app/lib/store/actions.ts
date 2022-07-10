@@ -1,20 +1,25 @@
-import { Device, User } from "./model";
+import { EventsTypes } from "../core";
+import { Device, DevicesData, User } from "./model";
 import { Store } from "./store";
 
 export enum ActionTypes {
   Navigate = 'navigate',
   SetUser = 'setUser',
   SyncDevices = 'syncDevices',
+  Query = 'query',
 }
 
 export const actions = {
-  navigate(context: Store, payload: string) {
-    context.commit(ActionTypes.Navigate, payload);
+  [ActionTypes.Navigate](context: Store, payload: string, eventType: EventsTypes) {
+    context.commit(ActionTypes.Navigate, payload, eventType);
   },
-  setUser(context: Store, payload: User) {
-    context.commit(ActionTypes.SetUser, payload);
+  [ActionTypes.SetUser](context: Store, payload: User, eventType: EventsTypes) {
+    context.commit(ActionTypes.SetUser, payload, eventType);
   },
-  syncDevices(context: Store, payload: Device[]) {
-    context.commit(ActionTypes.SyncDevices, payload);
+  [ActionTypes.SyncDevices](context: Store, payload: Device[], eventType: EventsTypes) {
+    context.commit(ActionTypes.SyncDevices, payload, eventType);
+  },
+  [ActionTypes.Query](context: Store, payload: DevicesData, eventType: EventsTypes) {
+    context.commit(ActionTypes.Query, payload, eventType);
   },
 };

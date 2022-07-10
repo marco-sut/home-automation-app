@@ -1,5 +1,7 @@
 import { authService } from "../core";
-import { Intent, SyncPayload, SyncResponse } from "./model";
+import { Intent, QueryPayload, SyncPayload } from "./model";
+
+const apiUrl = 'https://adobe.home-central-hub.com/v1';
 
 const getHeaders = (body?: unknown) => ({
   method: 'POST',
@@ -11,9 +13,14 @@ const getHeaders = (body?: unknown) => ({
   ...(body ? { body: JSON.stringify(body) } : {}),
 });
 
-const apiUrl = 'https://adobe.home-central-hub.com/v1';
-
-export async function sync(): Promise<SyncResponse> {
+export async function sync() {
   return fetch(`${apiUrl}/sync`, getHeaders({ requestId: '123', intent: Intent.SYNC } as SyncPayload))
-    .then((resp) => resp.json());
+    .then((resp) => resp.json())
+    .then((resp) => resp.payload);
+}
+
+export async function query(ids: { id: string }[]) {
+  return fetch(`${apiUrl}/query`, getHeaders({ requestId: '123', intent: Intent.QUERY, payload: { devices: ids } } as QueryPayload))
+    .then((resp) => resp.json())
+    .then((resp) => resp.payload);
 }

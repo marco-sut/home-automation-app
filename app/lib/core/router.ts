@@ -1,5 +1,6 @@
 import { store } from "../store";
 import { ActionTypes } from "../store/actions";
+import { EventsTypes } from "./pubsub";
 
 const routes = [
   {
@@ -18,19 +19,15 @@ const routes = [
     path: '/room-settings',
     template: '<app-room-settings></app-room-settings>',
   },
-  {
-    path: '**',
-    template: '<app-404></app-404>',
-  },
 ];
 
 function dispatchNavigationOnRouteChange() {
   const route = routes.find(route => route.path == window.location.pathname);
 
   if (route?.template) {
-    store.dispatch<string>(ActionTypes.Navigate, route.template);
+    store.dispatch<string>(ActionTypes.Navigate, route.template, EventsTypes.RouteChange);
   } else {
-    store.dispatch<string>(ActionTypes.Navigate, routes[routes.length - 1].template);
+    store.dispatch<string>(ActionTypes.Navigate, '<app-404></app-404>', EventsTypes.RouteChange);
   }
 }
 

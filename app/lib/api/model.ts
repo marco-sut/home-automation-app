@@ -1,4 +1,4 @@
-import { Device, TraitCommand } from "../store/model";
+import { Device, DevicesQueriedData, TraitCommand } from "../store/model";
 
 export enum Intent {
   SYNC = 'action.devices.SYNC',
@@ -32,11 +32,7 @@ export type QueryPayload = {
 export type QueryResponse = {
   requestId: string;
   payload: {
-    devices: Record<string, {
-      on?: boolean;
-      temperatureSetpoint?: number;
-      online: true;
-    }>
+    devices: DevicesQueriedData;
   }
 };
 

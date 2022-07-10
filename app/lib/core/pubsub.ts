@@ -1,5 +1,6 @@
 export enum EventsTypes {
   StateChange = 'stateChange',
+  RouteChange = 'routeChange',
 }
 
 export class PubSub {

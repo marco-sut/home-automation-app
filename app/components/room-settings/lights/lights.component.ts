@@ -2,6 +2,8 @@ import { BaseComponent } from "../../../lib";
 import styles from "./_lights.component.scss";
 
 export class LightsComponent extends BaseComponent {
+  private room = decodeURIComponent(new URLSearchParams(window.location.search).get('room') ?? '');
+  
   protected connectedCallback() {
     this.innerHTML = this.render();
   }

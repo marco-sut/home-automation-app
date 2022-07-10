@@ -23,16 +23,17 @@ export const handlers = [
     );
   }),
   rest.post('https://adobe.home-central-hub.com/v1/query', (req, res, ctx) => {
-    const devices = (req.body as QueryPayload).payload.devices.map((dev) => {
-      const deviceType = syncResponse.payload.devices.find((syncDev) => syncDev.id === dev.id)?.type;
+    const devices = (req.body as QueryPayload).payload.devices.reduce((map, obj) => {
+      const deviceType = syncResponse.payload.devices.find((syncDev) => syncDev.id === obj.id)?.type;
 
-      return {
-        id: dev.id,
-        online: true,
+      map[obj.id] = {
         ...(deviceType === DeviceType.LIGHT ? { on: false } : {}),
         ...(deviceType === DeviceType.THERMOSTAT ? { temperatureSetpoint: 20 } : {}),
-      }
-    });
+        online: true,
+      };
+
+      return map;
+    }, {});
 
     return res(
       ctx.status(200),

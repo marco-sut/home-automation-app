@@ -1,4 +1,4 @@
-import { BaseComponent, Store, apiService, Device, authService } from "./lib";
+import { BaseComponent, Store, apiService, Device, authService, EventsTypes } from "./lib";
 import { ActionTypes } from "./lib/store/actions";
 
 export class HomeAutomationApp extends BaseComponent {
@@ -6,7 +6,7 @@ export class HomeAutomationApp extends BaseComponent {
 
   constructor() {
     super();
-    this.store = this.connectToStore(this.connectedCallback.bind(this));
+    this.store = this.connectToStore(this.connectedCallback.bind(this), EventsTypes.RouteChange);
 
     if (!this.store.state.user) {
       authService.initPkce();
@@ -18,7 +18,7 @@ export class HomeAutomationApp extends BaseComponent {
       this.innerHTML = this.loading();
 
       try {
-        const devices = await apiService.sync().then((syncResponse) => syncResponse.payload.devices);
+        const { devices } = await apiService.sync();
         this.store.dispatch<Device[]>(ActionTypes.SyncDevices, devices);
       } catch (err) {
         throw new Error(`Something went wrong syncing the devices: ${err}`);

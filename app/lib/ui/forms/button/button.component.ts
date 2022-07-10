@@ -2,6 +2,10 @@ import { BaseComponent } from "../../../core";
 import styles from "./_button.component.scss";
 
 export class ButtonComponent extends BaseComponent {
+  get buttonId() {
+    return this.getAttribute('buttonId');
+  }
+
   get type() {
     return this.getAttribute('type');
   }
@@ -20,7 +24,7 @@ export class ButtonComponent extends BaseComponent {
 
   render() {
     return `
-      <button class="${styles['button']} ${styles[this.theme]}" type="${this.type}">${this.label}</button>
+      <button id="${this.buttonId}" class="${styles['button']} ${styles[this.theme]}" type="${this.type}">${this.label}</button>
     `;
   }
 }
