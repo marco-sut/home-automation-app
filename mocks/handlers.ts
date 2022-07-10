@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { DeviceType, ExecuteRequest, QueryRequest } from '../app/lib';
+import { ExecuteRequest, QueryRequest } from '../app/lib';
 import { authConfig } from '../app/lib';
 import { queryResponse, syncResponse } from './mockedResponses';
 
@@ -67,8 +67,6 @@ export const handlers = [
       }),
     );
 
-    // return res(ctx.status(500));
-
     // return res(
     //   ctx.status(200),
     //   ctx.json({
@@ -79,5 +77,7 @@ export const handlers = [
     //     }
     //   }),
     // );
+    
+    // return res(ctx.status(500));
   })
 ];
