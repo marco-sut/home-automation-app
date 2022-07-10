@@ -27,7 +27,7 @@ export class AuthService {
     navigateTo({}, this.authUrl);
   }
 
-  async fetchAccessAndIdToken() {
+  async fetchToken() {
     const queryParams = new URLSearchParams(window.location.search);
     const error = queryParams.get('error');
     const code = queryParams.get('code');

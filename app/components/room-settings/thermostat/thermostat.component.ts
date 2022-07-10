@@ -81,10 +81,16 @@ export class ThermostatComponent extends BaseComponent {
     }
 
     // Optimistic update
-    this.store.dispatch(executeAction({ [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: nextTemp } }));
+    this.store.dispatch(executeAction({
+      [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: nextTemp }
+    }));
 
     try {
-      const resp = await apiService.execute({ deviceId: this.thermostatRef.id, command: TraitCommand.TEMPERATURE_SETTING, params: { temperatureSetpoint: nextTemp } });
+      const resp = await apiService.execute({
+        deviceId: this.thermostatRef.id,
+        command: TraitCommand.TEMPERATURE_SETTING,
+        params: { temperatureSetpoint: nextTemp }
+      });
 
       if (resp.status === 'ERROR') {
         throw new Error(resp.errorDesc);
@@ -104,7 +110,7 @@ export class ThermostatComponent extends BaseComponent {
         <svg viewBox="-1 -1 102 102" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="60" r="50" fill="#ffffff" stroke="rgb(150, 150, 150)" stroke-width="0.3"></circle>
         </svg>
-        <h3 class="${styles['thermostat__label']}" aria-label="current room temperature 22 degrees">${this.thermostat.temperatureSetpoint ?? 'NA'}</h3>
+        <h3 class="${styles['thermostat__label']}" aria-label="current room temperature ${this.thermostat.temperatureSetpoint} degrees">${this.thermostat.temperatureSetpoint}°</h3>
         <div class="${styles['thermostat__controls']}">
           <button type="button" id="decrease-temp-button">
             <app-icon-minus></app-icon-minus> <span class="sr-only">Turn down the temperature</span>

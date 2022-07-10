@@ -43,20 +43,20 @@ export class RoomsListComponent extends BaseComponent {
   render() {
     this.detachHandlers();
     this.innerHTML = `
-    <div class="${styles['rooms-list__wrapper']}">
-      <ul id="rooms-list" class="${styles['rooms-list']}">
-        ${this.store.state.rooms.map((room) => `
-          <li>
-            <a href="#" class="room" data-room="${room}">
-              <figure>
-                ${getIcon(room)}
-                <figcaption>${room}</figcaption>
-              </figure>
-            </a>
-          </li>
-        `).join('')}
-      </ul>
-    </div>
+      <div class="${styles['rooms-list__wrapper']}">
+        <ul id="rooms-list" class="${styles['rooms-list']}">
+          ${this.store.state.rooms.map((room) => `
+            <li>
+              <a href="#" class="room" data-room="${room}">
+                <figure>
+                  ${getIcon(room)}
+                  <figcaption>${room}</figcaption>
+                </figure>
+              </a>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
     `;
     this.attachHandlers();
   }

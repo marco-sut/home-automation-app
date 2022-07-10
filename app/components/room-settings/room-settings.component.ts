@@ -69,8 +69,16 @@ export class RoomSettingsComponent extends BaseComponent {
   get linksList() {
     return `
       <ul id=devicesTypesList class=${styles['links-list']}>
-        <li><a id=thermostat-cta href=# class=${this.activeDeviceType === 'thermostat' && styles['active']}><app-icon-thermostat></app-icon-thermostat> <span class=${styles['links-list__item-text']}>Thermostat</span></a></li>
-        <li><a id=lights-cta href=# class=${this.activeDeviceType === 'lights' && styles['active']}><app-icon-light-bulb></app-icon-light-bulb> <span class=${styles['links-list__item-text']}>Lights</span></a></li>
+        <li>
+          <a id=thermostat-cta href=# class=${this.activeDeviceType === 'thermostat' && styles['active']}>
+            <app-icon-thermostat></app-icon-thermostat> <span class=${styles['links-list__item-text']}>Thermostat</span>
+          </a>
+        </li>
+        <li>
+          <a id=lights-cta href=# class=${this.activeDeviceType === 'lights' && styles['active']}>
+            <app-icon-light-bulb></app-icon-light-bulb> <span class=${styles['links-list__item-text']}>Lights</span>
+          </a>
+        </li>
       </ul>
       <div class=${styles['back-button']}>
         <app-button buttonId=back-cta type=button label=Back></app-button>

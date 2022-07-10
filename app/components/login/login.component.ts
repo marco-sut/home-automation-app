@@ -35,6 +35,7 @@ export class LoginComponent extends BaseComponent {
 
     const emailError = this.signInForm?.querySelector('#emailError') as Element;
     const passwordError = this.signInForm?.querySelector('#passwordError') as Element;
+
     emailError.innerHTML = '';
     passwordError.innerHTML = '';
 
@@ -61,28 +62,28 @@ export class LoginComponent extends BaseComponent {
   render() {
     this.detachHandlers();
     this.innerHTML = `
-    <div class="${styles['wrapper']}">
-      <div class="${styles['brand']}">
-        <img src="/assets/img/adobe_logo_white.svg" alt="Adobe logo">
+      <div class="${styles['wrapper']}">
+        <div class="${styles['brand']}">
+          <img src="/assets/img/adobe_logo_white.svg" alt="Adobe logo">
+        </div>
+        <article class="${styles['card']}">
+          <img src="/assets/img/adobe_logo_black.svg" alt="Adobe logo" class="${styles['mobile-logo']}">
+          <h1 class="${styles['card__title']}">Sign in</h1>
+          <form id="signInForm">
+            <p>
+              <app-input inputId="email" inputLabel="Email"></app-input>
+              <span id="emailError" class="${styles['error']}"></span>
+            </p>
+            <p>
+              <app-input inputId="password" inputLabel="Password"></app-input>
+              <span id="passwordError" class="${styles['error']}"></span>
+            </p>
+            <div class="${styles['button-wrapper']}">
+              <app-button id="signInButton" type="submit" label="Sign in"></app-button>
+            </div>
+          </form>
+        </article>
       </div>
-      <article class="${styles['card']}">
-        <img src="/assets/img/adobe_logo_black.svg" alt="Adobe logo" class="${styles['mobile-logo']}">
-        <h1 class="${styles['card__title']}">Sign in</h1>
-        <form id="signInForm">
-          <p>
-            <app-input inputId="email" inputLabel="Email"></app-input>
-            <span id="emailError" class="${styles['error']}"></span>
-          </p>
-          <p>
-            <app-input inputId="password" inputLabel="Password"></app-input>
-            <span id="passwordError" class="${styles['error']}"></span>
-          </p>
-          <div class="${styles['button-wrapper']}">
-            <app-button id="signInButton" type="submit" label="Sign in"></app-button>
-          </div>
-        </form>
-      </article>
-    </div>
     `;
     this.attachHandlers();
   }

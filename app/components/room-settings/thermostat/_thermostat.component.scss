@@ -23,6 +23,7 @@
     font-size: 4em;
     color: $color-blue;
     font-weight: $font-weight-normal;
+    margin-left: 0.2em;
 
     @include mq('xl') {
       font-size: 6em;

@@ -1,5 +1,8 @@
 import { User } from "../store";
 
+/**
+ * MOST OF THIS FILE IS TAKEN FROM VARIOUS RESOURCES ON THE INTERNET
+ */
 export function generateRandomString() {
   const array = new Uint32Array(28);
   window.crypto.getRandomValues(array);
@@ -40,6 +43,7 @@ export function parseJwt(token: string): User {
   return JSON.parse(jsonPayload);
 }
 
+// This function I wrote myself
 export function distinct<T>(array: T[], key: string, exclude?: string) {
   return [...new Set(array.map(item => item[key] !== exclude ? item[key] : undefined).filter(Boolean))];
 }

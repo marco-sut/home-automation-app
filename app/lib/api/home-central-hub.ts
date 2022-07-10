@@ -3,8 +3,8 @@ import { ExecuteRequest, ExecuteRequestPayload, ExecuteResponsePayload, Intent, 
 
 const apiUrl = 'https://adobe.home-central-hub.com/v1';
 
-const getHeaders = (body?: unknown) => ({
-  method: 'POST',
+const getHeaders = (body?: unknown, method = 'POST') => ({
+  method,
   headers: {
     'Content-Type': 'application/json',
     'Cache-Control': 'max-age=3600',
@@ -33,7 +33,9 @@ export async function query(payload: QueryRequestPayload): Promise<QueryResponse
 
 export async function execute({ deviceId, command, params: { on, temperatureSetpoint } }: ExecuteRequestPayload): Promise<ExecuteResponsePayload> {
   const body: ExecuteRequest = {
-    requestId: '123', intent: Intent.EXECUTE, payload: {
+    requestId: '123',
+    intent: Intent.EXECUTE,
+    payload: {
       deviceId,
       command,
       params: {
