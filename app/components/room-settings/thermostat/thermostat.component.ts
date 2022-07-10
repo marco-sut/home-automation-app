@@ -1,7 +1,6 @@
 import { BaseComponent, DeviceRef, DeviceType, Store, apiService, queryAction, DeviceData, executeAction, TraitCommand } from "../../../lib";
+import { THERMOSTAT_DEFAULT_TEMP, THERMOSTAT_HIGHEST_TEMP, THERMOSTAT_LOWEST_TEMP } from "../../../lib/core/constants";
 import styles from "./_thermostat.component.scss";
-
-const defaultTemperature = 18;
 
 export class ThermostatComponent extends BaseComponent {
   private store: Store;
@@ -10,7 +9,7 @@ export class ThermostatComponent extends BaseComponent {
   private increaseTempButton: Element | null;
   private decreaseTempButton: Element | null;
 
-  private handleTempSetPointRef = this.handleTempSetPoint.bind(this);
+  private handleTempSetPointRef = this.handleTemperatureSetPoint.bind(this);
   private connectedToStoreCallback = this.render.bind(this);
 
   get thermostat(): DeviceData {
@@ -44,7 +43,7 @@ export class ThermostatComponent extends BaseComponent {
 
   protected disconnectedCallback() {
     this.detachHandlers();
-    this.store.unsubscribe(this.connectedToStoreCallback);
+    this.disconnectFromStore(this.connectedToStoreCallback);
   }
 
   private attachHandlers() {
@@ -60,11 +59,11 @@ export class ThermostatComponent extends BaseComponent {
     this.decreaseTempButton?.removeEventListener('click', this.handleTempSetPointRef);
   }
 
-  private async handleTempSetPoint(event: Event) {
+  private async handleTemperatureSetPoint(event: Event) {
     event.preventDefault();
 
     const buttonId = (event.target as HTMLElement).closest('button')?.id;
-    const currentTemp = this.thermostat.temperatureSetpoint ?? defaultTemperature;
+    const currentTemp = this.thermostat.temperatureSetpoint ?? THERMOSTAT_DEFAULT_TEMP;
 
     switch (buttonId) {
       case 'increase-temp-button':
@@ -76,34 +75,26 @@ export class ThermostatComponent extends BaseComponent {
     }
   }
 
-  private async setTemp(prevTemp: number, currentTemp: number) {
-    if (!this.thermostatRef?.id) {
+  private async setTemp(currentTemp: number, nextTemp: number) {
+    if (!this.thermostatRef?.id || (nextTemp < THERMOSTAT_LOWEST_TEMP || nextTemp > THERMOSTAT_HIGHEST_TEMP)) {
       return;
     }
 
     // Optimistic update
-    this.store.dispatch(executeAction({ [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: currentTemp } }));
+    this.store.dispatch(executeAction({ [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: nextTemp } }));
 
     try {
-      const resp = await apiService.execute({ deviceId: this.thermostatRef.id, command: TraitCommand.TEMPERATURE_SETTING, params: { temperatureSetpoint: currentTemp } });
+      const resp = await apiService.execute({ deviceId: this.thermostatRef.id, command: TraitCommand.TEMPERATURE_SETTING, params: { temperatureSetpoint: nextTemp } });
 
       if (resp.status === 'ERROR') {
         throw new Error(resp.errorDesc);
       }
     } catch (err) {
       // rollback value on error
-      this.store.dispatch(executeAction({ [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: prevTemp } }));
+      this.store.dispatch(executeAction({ [this.thermostatRef.id]: { ...this.thermostat, temperatureSetpoint: currentTemp } }));
       this.renderError(err);
       throw new Error(`Error: ${err}`);
     }
-  }
-
-  renderLoading() {
-    this.innerHTML = `<h3>Loading...</h3>`;
-  }
-
-  renderError(errorMessage?: string) {
-    this.innerHTML = `<h3 style="color: red;">Something went wrong...${errorMessage}</h3>`;
   }
 
   render() {
@@ -125,6 +116,15 @@ export class ThermostatComponent extends BaseComponent {
       </article>
     `;
     this.attachHandlers();
+  }
+
+  renderLoading() {
+    this.innerHTML = `<h3>Loading...</h3>`;
+  }
+
+  renderError(errorMessage?: string) {
+    this.render();
+    this.innerHTML = this.innerHTML + `<h4 style="color: red; margin-top: 1em; text-align: center;">Something went wrong. ${errorMessage}</h4>`;
   }
 
   renderNotFound() {

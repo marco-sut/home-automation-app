@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 import { DeviceType, ExecuteRequest, QueryRequest } from '../app/lib';
 import { authConfig } from '../app/lib';
-import { syncResponse } from './mockedResponses';
+import { queryResponse, syncResponse } from './mockedResponses';
 
 export const handlers = [
   rest.post(authConfig.tokenEndpoint, (req, res, ctx) => {
@@ -24,13 +24,7 @@ export const handlers = [
   }),
   rest.post('https://adobe.home-central-hub.com/v1/query', (req, res, ctx) => {
     const devices = (req.body as QueryRequest).payload.devices.reduce((map, obj) => {
-      const deviceType = syncResponse.payload.devices.find((syncDev) => syncDev.id === obj.id)?.type;
-
-      map[obj.id] = {
-        ...(deviceType === DeviceType.LIGHT ? { on: false } : {}),
-        ...(deviceType === DeviceType.THERMOSTAT ? { temperatureSetpoint: 20 } : {}),
-        online: true,
-      };
+      map[obj.id] = queryResponse.payload.devices[obj.id];
 
       return map;
     }, {});
@@ -46,7 +40,21 @@ export const handlers = [
     );
   }),
   rest.post('https://adobe.home-central-hub.com/v1/execute', (req, res, ctx) => {
-    const params = (req.body as ExecuteRequest).payload.params;
+    const payload = (req.body as ExecuteRequest).payload;
+    const { params } = payload;
+    const { deviceId } = payload;
+    const devices = queryResponse.payload.devices;
+    const newState = {
+      ...(typeof params.on !== 'undefined' ? { on: params.on } : {}),
+      ...(typeof params.temperatureSetpoint !== 'undefined' ? { temperatureSetpoint: params.temperatureSetpoint } : {}),
+      online: true,
+    };
+
+    for (const key in devices) {
+      if (key === deviceId) {
+        devices[key] = newState;
+      }
+    }
 
     return res(
       ctx.status(200),
@@ -54,11 +62,7 @@ export const handlers = [
         requestId: '123',
         payload: {
           status: 'SUCCESS',
-          state: {
-            ...(typeof params.on !== 'undefined' ? { on: params.on } : {}),
-            ...(typeof params.temperatureSetpoint !== 'undefined' ? { temperatureSetpoint: params.temperatureSetpoint } : {}),
-            online: true,
-          }
+          state: newState,
         }
       }),
     );

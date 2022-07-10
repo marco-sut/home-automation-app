@@ -24,7 +24,7 @@ export type DeviceRef = {
 export type DeviceData = {
   on?: boolean;
   temperatureSetpoint?: number;
-  online: boolean;
+  online?: boolean;
 };
 
 export type Devices = Record<string, DeviceData>;

@@ -1,4 +1,4 @@
-import { DeviceType, SyncResponse, TraitCommand } from "../app/lib";
+import { DeviceType, QueryResponse, SyncResponse, TraitCommand } from "../app/lib";
 
 export const syncResponse: SyncResponse = {
   requestId: '123',
@@ -130,5 +130,69 @@ export const syncResponse: SyncResponse = {
       name: 'Thermostat',
       room: 'ALL',
     }]
+  }
+};
+
+export const queryResponse: QueryResponse = {
+  requestId: '123',
+  payload: {
+    devices: {
+      '1': {
+        on: false,
+        online: true,
+      },
+      '2': {
+        on: true,
+        online: true,
+      },
+      '3': {
+        on: false,
+        online: true,
+      },
+      '4': {
+        on: false,
+        online: true,
+      },
+      '5': {
+        on: false,
+        online: true,
+      },
+      '6': {
+        on: false,
+        online: true,
+      },
+      '7': {
+        on: true,
+        online: true,
+      },
+      '8': {
+        on: false,
+        online: true,
+      },
+      '9': {
+        on: true,
+        online: true,
+      },
+      '10': {
+        on: false,
+        online: true,
+      },
+      '11': {
+        on: false,
+        online: true,
+      },
+      '12': {
+        on: false,
+        online: true,
+      },
+      '13': {
+        on: false,
+        online: true,
+      },
+      '14': {
+        temperatureSetpoint: 18,
+        online: true,
+      }
+    }
   }
 };

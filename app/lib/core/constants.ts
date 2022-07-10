@@ -1,0 +1,3 @@
+export const THERMOSTAT_DEFAULT_TEMP = 18;
+export const THERMOSTAT_LOWEST_TEMP = 15;
+export const THERMOSTAT_HIGHEST_TEMP = 25;

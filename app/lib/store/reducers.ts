@@ -17,14 +17,16 @@ export const reducers = {
     return { ...state, devicesData: payload };
   },
   [ActionTypes.Execute](state: AppState, payload: Devices): AppState {
-    const patchedDevicesData: Devices = Object.keys(state.devicesData).reduce((acc: object, key: string) => {
+    const newDevicesData: Devices = Object.keys(state.devicesData).reduce((acc: object, key: string) => {
       if (key in payload) {
         acc[key] = payload[key];
+      } else {
+        acc[key] = state.devicesData[key];
       }
 
       return acc;
     }, {});
 
-    return { ...state, devicesData: patchedDevicesData };
+    return { ...state, devicesData: newDevicesData };
   }
 };

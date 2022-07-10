@@ -11,4 +11,8 @@ export abstract class BaseComponent extends HTMLElement {
 
     return store;
   }
+
+  protected disconnectFromStore(callback: () => undefined, eventType?: EventsTypes): void {
+    store.unsubscribe(callback, eventType);
+  }
 }
