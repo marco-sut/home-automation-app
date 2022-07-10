@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { DeviceType, ExecutePayload, QueryPayload } from '../app/lib';
+import { DeviceType, ExecuteRequest, QueryRequest } from '../app/lib';
 import { authConfig } from '../app/lib';
 import { syncResponse } from './mockedResponses';
 
@@ -23,7 +23,7 @@ export const handlers = [
     );
   }),
   rest.post('https://adobe.home-central-hub.com/v1/query', (req, res, ctx) => {
-    const devices = (req.body as QueryPayload).payload.devices.reduce((map, obj) => {
+    const devices = (req.body as QueryRequest).payload.devices.reduce((map, obj) => {
       const deviceType = syncResponse.payload.devices.find((syncDev) => syncDev.id === obj.id)?.type;
 
       map[obj.id] = {
@@ -46,7 +46,7 @@ export const handlers = [
     );
   }),
   rest.post('https://adobe.home-central-hub.com/v1/execute', (req, res, ctx) => {
-    const params = (req.body as ExecutePayload).payload.params;
+    const params = (req.body as ExecuteRequest).payload.params;
 
     return res(
       ctx.status(200),
@@ -56,11 +56,24 @@ export const handlers = [
           status: 'SUCCESS',
           state: {
             ...(typeof params.on !== 'undefined' ? { on: params.on } : {}),
-            ...(typeof params.temperatureSetpoint !== 'undefined' ? { on: params.temperatureSetpoint } : {}),
+            ...(typeof params.temperatureSetpoint !== 'undefined' ? { temperatureSetpoint: params.temperatureSetpoint } : {}),
             online: true,
           }
         }
       }),
     );
+
+    // return res(ctx.status(500));
+
+    // return res(
+    //   ctx.status(200),
+    //   ctx.json({
+    //     requestId: '123',
+    //     payload: {
+    //       status: 'ERROR',
+    //       errorDesc: 'Device offline',
+    //     }
+    //   }),
+    // );
   })
 ];

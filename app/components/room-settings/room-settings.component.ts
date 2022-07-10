@@ -3,14 +3,17 @@ import styles from './_room-settings.component.scss';
 
 export class RoomSettingsComponent extends BaseComponent {
   private room = decodeURIComponent(new URLSearchParams(window.location.search).get('room') ?? '');
+
   private devicesTypesList: Element | null;
   private backCta: Element | null;
+  
   private activeDeviceType: 'thermostat' | 'lights' = 'thermostat';
 
+  private handleDeviceTypeClickRef = this.handleDeviceTypeClick.bind(this);
+  private handleBackCtaClickRef = this.handleBackCtaClick.bind(this);
+
   protected connectedCallback() {
-    this.detachHandlers();
-    this.innerHTML = this.render();
-    this.attachHandlers();
+    this.render();
   }
 
   protected disconnectedCallback() {
@@ -21,13 +24,13 @@ export class RoomSettingsComponent extends BaseComponent {
     this.devicesTypesList = document.querySelector('#devicesTypesList');
     this.backCta = document.querySelector('#back-cta');
 
-    this.devicesTypesList?.addEventListener('click', this.handleDeviceTypeClick.bind(this));
-    this.backCta?.addEventListener('click', this.handleBackCtaClick.bind(this));
+    this.devicesTypesList?.addEventListener('click', this.handleDeviceTypeClickRef);
+    this.backCta?.addEventListener('click', this.handleBackCtaClickRef);
   }
 
   private detachHandlers() {
-    this.devicesTypesList?.removeEventListener('click', this.handleDeviceTypeClick.bind(this));
-    this.backCta?.removeEventListener('click', this.handleBackCtaClick.bind(this));
+    this.devicesTypesList?.removeEventListener('click', this.handleDeviceTypeClickRef);
+    this.backCta?.removeEventListener('click', this.handleBackCtaClickRef);
   }
 
   private handleDeviceTypeClick(event: Event) {
@@ -75,12 +78,14 @@ export class RoomSettingsComponent extends BaseComponent {
     `;
   }
 
-  render(): string {
-    return `
+  render() {
+    this.detachHandlers();
+    this.innerHTML = `
       <app-layout 
         leftCol="${this.renderLeftCol}" 
         rightCol="${this.renderRightCol}">
       </app-layout>
     `;
+    this.attachHandlers();
   }
 }

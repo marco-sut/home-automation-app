@@ -1,4 +1,4 @@
-import { Device, DevicesData, User } from "./model";
+import { DeviceRef, Devices, User } from "./model";
 import { EventsTypes } from "./store";
 
 export enum ActionTypes {
@@ -6,6 +6,7 @@ export enum ActionTypes {
   SetUser = 'setUser',
   SyncDevices = 'syncDevices',
   Query = 'query',
+  Execute = 'execute',
 }
 
 export type Action<T> = {
@@ -32,7 +33,7 @@ export const setUserAction = (actionPayload: User): Action<User> => ({
   }
 });
 
-export const syncDevicesAction = (actionPayload: Device[]): Action<Device[]> => ({
+export const syncDevicesAction = (actionPayload: DeviceRef[]): Action<DeviceRef[]> => ({
   type: ActionTypes.SyncDevices,
   payload: {
     data: actionPayload,
@@ -40,7 +41,7 @@ export const syncDevicesAction = (actionPayload: Device[]): Action<Device[]> => 
   }
 });
 
-export const queryAction = (actionPayload: DevicesData): Action<DevicesData> => ({
+export const queryAction = (actionPayload: Devices): Action<Devices> => ({
   type: ActionTypes.Query,
   payload: {
     data: actionPayload,
@@ -48,3 +49,10 @@ export const queryAction = (actionPayload: DevicesData): Action<DevicesData> => 
   }
 });
 
+export const executeAction = (actionPayload: Devices): Action<Devices> => ({
+  type: ActionTypes.Execute,
+  payload: {
+    data: actionPayload,
+    eventType: EventsTypes.StateChange
+  }
+});

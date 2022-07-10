@@ -5,14 +5,15 @@ export class RoomsListComponent extends BaseComponent {
   private store: Store;
   private roomsList: Element | null;
 
+  private handleRoomClickRef = this.handleRoomClick.bind(this);
+
   constructor() {
     super();
     this.store = this.connectToStore();
   }
 
   protected connectedCallback() {
-    this.innerHTML = this.render();
-    this.attachHandlers();
+    this.render();
   }
 
   protected disconnectedCallback() {
@@ -21,11 +22,11 @@ export class RoomsListComponent extends BaseComponent {
 
   private attachHandlers() {
     this.roomsList = document.querySelector('#rooms-list');
-    this.roomsList?.addEventListener('click', this.handleRoomClick.bind(this));
+    this.roomsList?.addEventListener('click', this.handleRoomClickRef);
   }
 
   private detachHandlers() {
-    this.roomsList?.removeEventListener('click', this.handleRoomClick.bind(this));
+    this.roomsList?.removeEventListener('click', this.handleRoomClickRef);
   }
 
   private handleRoomClick(event: Event) {
@@ -33,14 +34,15 @@ export class RoomsListComponent extends BaseComponent {
 
     const target = (event.target as HTMLElement).closest('.room');
     const room = (target as HTMLElement).dataset.room;
-    
+
     if (room) {
       navigateTo({}, `/room-settings?room=${encodeURIComponent(room)}`);
     }
   }
 
-  render(): string {
-    return `
+  render() {
+    this.detachHandlers();
+    this.innerHTML = `
     <div class="${styles['rooms-list__wrapper']}">
       <ul id="rooms-list" class="${styles['rooms-list']}">
         ${this.store.state.rooms.map((room) => `
@@ -56,6 +58,7 @@ export class RoomsListComponent extends BaseComponent {
       </ul>
     </div>
     `;
+    this.attachHandlers();
   }
 }
 

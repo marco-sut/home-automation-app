@@ -13,7 +13,7 @@ export enum TraitCommand {
   TEMPERATURE_SETTING = 'action.devices.types.TemperatureSetting',
 }
 
-export type Device = {
+export type DeviceRef = {
   id: string;
   type: DeviceType;
   traits: TraitCommand[];
@@ -21,8 +21,10 @@ export type Device = {
   room: string;
 };
 
-export type DevicesData = Record<string, {
+export type DeviceData = {
   on?: boolean;
   temperatureSetpoint?: number;
-  online: true;
-}>;
+  online: boolean;
+};
+
+export type Devices = Record<string, DeviceData>;

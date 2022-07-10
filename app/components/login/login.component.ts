@@ -7,9 +7,10 @@ export class LoginComponent extends BaseComponent {
   private emailRegEx = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   private passwordMinLength = 4;
 
+  private handleSignInRef = this.handleSignIn.bind(this);
+
   protected connectedCallback() {
-    this.innerHTML = this.render();
-    this.attachHandlers();
+    this.render();
   }
 
   protected disconnectedCallback() {
@@ -18,11 +19,11 @@ export class LoginComponent extends BaseComponent {
 
   private attachHandlers() {
     this.signInForm = document.querySelector('#signInForm');
-    this.signInForm?.addEventListener('submit', this.handleSignIn.bind(this));
+    this.signInForm?.addEventListener('submit', this.handleSignInRef);
   }
 
   private detachHandlers() {
-    this.signInForm?.removeEventListener('submit', this.handleSignIn.bind(this));
+    this.signInForm?.removeEventListener('submit', this.handleSignInRef);
   }
 
   private handleSignIn(event: SubmitEvent) {
@@ -57,8 +58,9 @@ export class LoginComponent extends BaseComponent {
     navigateTo({}, `${redirectUri}?code=123456&state=${state}`);
   }
 
-  render(): string {
-    return `
+  render() {
+    this.detachHandlers();
+    this.innerHTML = `
     <div class="${styles['wrapper']}">
       <div class="${styles['brand']}">
         <img src="/assets/img/adobe_logo_white.svg" alt="Adobe logo">
@@ -82,5 +84,6 @@ export class LoginComponent extends BaseComponent {
       </article>
     </div>
     `;
+    this.attachHandlers();
   }
 }

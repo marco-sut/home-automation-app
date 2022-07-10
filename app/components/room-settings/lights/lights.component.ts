@@ -3,13 +3,13 @@ import styles from "./_lights.component.scss";
 
 export class LightsComponent extends BaseComponent {
   private room = decodeURIComponent(new URLSearchParams(window.location.search).get('room') ?? '');
-  
+
   protected connectedCallback() {
-    this.innerHTML = this.render();
+    this.render();
   }
 
-  render(): string {
-    return `
+  render() {
+    this.innerHTML = `
       <ul class="${styles['lights-list']}">
         <li class="${styles['lights-list__item']}">
           <p class="${styles['lights-list__title']}">Ceiling</p>

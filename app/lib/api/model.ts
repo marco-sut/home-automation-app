@@ -1,4 +1,4 @@
-import { Device, DevicesQueriedData, TraitCommand } from "../store/model";
+import { DeviceRef, Devices, TraitCommand } from "../store/model";
 
 export enum Intent {
   SYNC = 'action.devices.SYNC',
@@ -6,62 +6,74 @@ export enum Intent {
   EXECUTE = 'action.devices.execute',
 }
 
-export type SyncPayload = {
+export type SyncRequest = {
   requestId: string;
   intent: Intent.SYNC;
 };
 
-export type SyncResponse = {
-  requestId: string;
-  payload: {
-    agentUserId: string;
-    devices: Device[],
-  }
+export type SyncResponsePayload = {
+  agentUserId: string;
+  devices: DeviceRef[],
 };
 
-export type QueryPayload = {
+export type SyncResponse = {
+  requestId: string;
+  payload: SyncResponsePayload;
+};
+
+export type QueryRequestPayload = {
+  devices: {
+    id: string
+  }[]
+};
+
+export type QueryRequest = {
   requestId: string;
   intent: Intent.QUERY;
-  payload: {
-    devices: {
-      id: string
-    }[]
-  }
+  payload: QueryRequestPayload;
+};
+
+export type QueryResponsePayload = {
+  devices: Devices;
 };
 
 export type QueryResponse = {
   requestId: string;
-  payload: {
-    devices: DevicesQueriedData;
-  }
+  payload: QueryResponsePayload;
 };
 
-export type ExecutePayload = {
+export type ExecuteParams = {
+  on?: boolean;
+  temperatureSetpoint?: number;
+};
+
+export type ExecuteState = ExecuteParams & {
+  online: boolean;
+};
+
+export type ExecuteRequestPayload = {
+  deviceId: string;
+  command: TraitCommand;
+  params: ExecuteParams;
+};
+
+export type ExecuteRequest = {
   requestId: string;
   intent: Intent.EXECUTE;
-  payload: {
-    deviceId: string;
-    command: TraitCommand;
-    params: {
-      on?: boolean;
-      temperatureSetpoint?: number;
-    }
-  }
+  payload: ExecuteRequestPayload;
 };
 
 export type ResponseStatus = 'SUCCESS' | 'ERROR';
 
+export type ExecuteResponsePayload = {
+  status: ResponseStatus;
+  state: ExecuteState,
+  errorDesc?: string;
+};
+
 export type ExecuteResponse = {
   requestId: string;
-  payload: {
-    status: ResponseStatus;
-    state: {
-      on?: boolean;
-      temperatureSetpoint?: number;
-      online: boolean;
-    },
-    errorDesc?: string;
-  }
+  payload: ExecuteResponsePayload;
 };
 
 export type TokenPayload = {

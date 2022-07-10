@@ -9,8 +9,6 @@ export class AuthenticateComponent extends BaseComponent {
   }
 
   protected async connectedCallback() {
-    this.innerHTML = this.render();
-
     if (!this.store.state.user && authService.codeChallenge) {
       await authService.fetchAccessAndIdToken();
     }
@@ -18,7 +16,5 @@ export class AuthenticateComponent extends BaseComponent {
     navigateTo({}, '/rooms');
   }
 
-  render(): string {
-    return '';
-  }
+  render() { return undefined; }
 }

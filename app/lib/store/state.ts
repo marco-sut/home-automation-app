@@ -1,10 +1,10 @@
-import { Device, DevicesData, User } from "./model";
+import { DeviceRef, Devices, User } from "./model";
 
 export interface AppState {
   activatedRoute: string;
-  devices: Device[];
+  devices: DeviceRef[];
+  devicesData: Devices;
   rooms: string[];
-  devicesData?: DevicesData;
   user?: User;
 }
 
@@ -12,4 +12,5 @@ export const initialState: AppState = {
   activatedRoute: '/',
   devices: [],
   rooms: [],
+  devicesData: {},
 };

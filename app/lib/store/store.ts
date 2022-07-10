@@ -17,6 +17,29 @@ export class Store {
     this.state = initialState;
   }
 
+  subscribe(callback: () => void, eventType?: EventsTypes) {
+    const event = eventType ?? EventsTypes.StateChange;
+
+    if (!(event in this.events)) {
+      this.events[event] = [];
+    }
+
+    return this.events[event].push(callback);
+  }
+
+  unsubscribe(callback: () => void, eventType?: EventsTypes) {
+    const event = eventType ?? EventsTypes.StateChange;
+
+    if (event in this.events) {
+      this.events[event] = this.events[event].filter((cb: () => void) => cb !== callback);
+    }
+  }
+
+  dispatch<T>(action: Action<T>) {
+    const { type, payload } = action;
+    this.setState(payload.eventType, this.reducers[type](this.state, payload.data));
+  }
+
   private publish(event: EventsTypes, payload = {}) {
     if (!(event in this.events)) {
       return [];
@@ -28,24 +51,5 @@ export class Store {
   private setState(eventType: EventsTypes, state: AppState) {
     this.state = state;
     this.publish(eventType, this.state);
-  }
-
-  subscribe(event: EventsTypes, callback: () => void) {
-    if (!(event in this.events)) {
-      this.events[event] = [];
-    }
-
-    return this.events[event].push(callback);
-  }
-
-  unsubscribe(event: EventsTypes, callback: () => void) {
-    if (event in this.events) {
-      this.events[event] = this.events[event].filter((cb: () => void) => cb !== callback);
-    }
-  }
-
-  dispatch<T>(action: Action<T>) {
-    const { type, payload } = action;
-    this.setState(payload.eventType, this.reducers[type](this.state, payload.data));
   }
 }

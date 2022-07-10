@@ -9,7 +9,7 @@ export class RoomsComponent extends BaseComponent {
   }
 
   protected connectedCallback() {
-    this.innerHTML = this.render();
+    this.render();
   }
 
   get renderLeftCol() {
@@ -22,8 +22,8 @@ export class RoomsComponent extends BaseComponent {
     return `<app-rooms-list></app-rooms-list>`;
   }
 
-  render(): string {
-    return `
+  render() {
+    this.innerHTML = `
       <app-layout 
         leftCol="${this.renderLeftCol}" 
         rightCol="${this.renderRightCol}">

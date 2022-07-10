@@ -11,11 +11,11 @@ export class LayoutComponent extends BaseComponent {
   }
 
   protected connectedCallback() {
-    this.innerHTML = this.render();
+    this.render();
   }
 
-  render(): string {
-    return `
+  render() {
+    this.innerHTML = `
       <div class="${styles['wrapper']}">
         <main class="${styles['container']}">
           <section class="${styles['col']}">

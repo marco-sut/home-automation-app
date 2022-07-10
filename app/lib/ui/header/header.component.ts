@@ -11,11 +11,11 @@ export class HeaderComponent extends BaseComponent {
   }
 
   protected connectedCallback() {
-    this.innerHTML = this.render();
+    this.render();
   }
 
-  render(): string {
-    return `
+  render() {
+    this.innerHTML = `
       <header>
         <img class="${styles['logo']}" src="/assets/img/Adobe_Experience_Cloud_logo.svg" height="65" alt="Adobe logo">
         <h1>${this.pageTitle}</h1>

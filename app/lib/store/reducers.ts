@@ -1,6 +1,6 @@
 import { AppState } from "./state";
 import { ActionTypes } from "./actions";
-import { Device, DevicesData, User } from "./model";
+import { DeviceRef, Devices, User } from "./model";
 import { distinct } from "../core";
 
 export const reducers = {
@@ -10,10 +10,21 @@ export const reducers = {
   [ActionTypes.SetUser](state: AppState, payload: User): AppState {
     return { ...state, user: payload };
   },
-  [ActionTypes.SyncDevices](state: AppState, payload: Device[]): AppState {
-    return { ...state, devices: payload, rooms: distinct<Device>(payload, 'room', 'ALL') };
+  [ActionTypes.SyncDevices](state: AppState, payload: DeviceRef[]): AppState {
+    return { ...state, devices: payload, rooms: distinct<DeviceRef>(payload, 'room', 'ALL') };
   },
-  [ActionTypes.Query](state: AppState, payload: DevicesData): AppState {
+  [ActionTypes.Query](state: AppState, payload: Devices): AppState {
     return { ...state, devicesData: payload };
+  },
+  [ActionTypes.Execute](state: AppState, payload: Devices): AppState {
+    const patchedDevicesData: Devices = Object.keys(state.devicesData).reduce((acc: object, key: string) => {
+      if (key in payload) {
+        acc[key] = payload[key];
+      }
+
+      return acc;
+    }, {});
+
+    return { ...state, devicesData: patchedDevicesData };
   }
 };

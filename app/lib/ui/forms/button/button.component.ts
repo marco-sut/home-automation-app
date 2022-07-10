@@ -19,11 +19,11 @@ export class ButtonComponent extends BaseComponent {
   }
 
   connectedCallback() {
-    this.innerHTML = this.render();
+    this.render();
   }
 
   render() {
-    return `
+    this.innerHTML = `
       <button id="${this.buttonId}" class="${styles['button']} ${styles[this.theme]}" type="${this.type}">${this.label}</button>
     `;
   }

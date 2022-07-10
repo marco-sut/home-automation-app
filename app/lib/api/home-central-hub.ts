@@ -1,5 +1,5 @@
 import { authService } from "../core";
-import { Intent, QueryPayload, SyncPayload } from "./model";
+import { ExecuteRequest, ExecuteRequestPayload, ExecuteResponsePayload, Intent, QueryRequest, QueryRequestPayload, QueryResponsePayload, SyncRequest, SyncResponsePayload } from "./model";
 
 const apiUrl = 'https://adobe.home-central-hub.com/v1';
 
@@ -13,14 +13,35 @@ const getHeaders = (body?: unknown) => ({
   ...(body ? { body: JSON.stringify(body) } : {}),
 });
 
-export async function sync() {
-  return fetch(`${apiUrl}/sync`, getHeaders({ requestId: '123', intent: Intent.SYNC } as SyncPayload))
+export async function fetchApi<T, U>({ endpoint, body }: { endpoint: string, body: T }): Promise<U> {
+  return fetch(`${apiUrl}/${endpoint}`, getHeaders(body))
     .then((resp) => resp.json())
     .then((resp) => resp.payload);
 }
 
-export async function query(ids: { id: string }[]) {
-  return fetch(`${apiUrl}/query`, getHeaders({ requestId: '123', intent: Intent.QUERY, payload: { devices: ids } } as QueryPayload))
-    .then((resp) => resp.json())
-    .then((resp) => resp.payload);
+export async function sync(): Promise<SyncResponsePayload> {
+  const body: SyncRequest = { requestId: '123', intent: Intent.SYNC };
+
+  return fetchApi<SyncRequest, SyncResponsePayload>({ endpoint: 'sync', body });
+}
+
+export async function query(payload: QueryRequestPayload): Promise<QueryResponsePayload> {
+  const body: QueryRequest = { requestId: '123', intent: Intent.QUERY, payload };
+
+  return fetchApi<QueryRequest, QueryResponsePayload>({ endpoint: 'query', body });
+}
+
+export async function execute({ deviceId, command, params: { on, temperatureSetpoint } }: ExecuteRequestPayload): Promise<ExecuteResponsePayload> {
+  const body: ExecuteRequest = {
+    requestId: '123', intent: Intent.EXECUTE, payload: {
+      deviceId,
+      command,
+      params: {
+        ...(typeof on !== 'undefined' ? { on } : {}),
+        ...(typeof temperatureSetpoint !== 'undefined' ? { temperatureSetpoint } : {}),
+      }
+    }
+  };
+
+  return fetchApi<ExecuteRequest, ExecuteResponsePayload>({ endpoint: 'execute', body });
 }
