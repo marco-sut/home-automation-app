@@ -1,5 +1,4 @@
-import { store } from "../store";
-import { ActionTypes } from "../store/actions";
+import { store, setUserAction, User } from "../store";
 import { navigateTo } from "./router";
 import { generateRandomString, parseJwt, pkceChallengeFromVerifier } from "./utils";
 
@@ -58,7 +57,7 @@ export class AuthService {
           }).then((response) => response.json());
 
           this.accessToken = access_token;
-          store.dispatch<object>(ActionTypes.SetUser, parseJwt(id_token))
+          store.dispatch<User>(setUserAction(parseJwt(id_token)))
         } catch (error) {
           throw new Error(`Error returned from token endpoint: ${error}`);
         }

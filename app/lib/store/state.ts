@@ -8,7 +8,7 @@ export interface AppState {
   user?: User;
 }
 
-export const state: AppState = {
+export const initialState: AppState = {
   activatedRoute: '/',
   devices: [],
   rooms: [],

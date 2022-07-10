@@ -1,3 +1,5 @@
+import { User } from "../store";
+
 export function generateRandomString() {
   const array = new Uint32Array(28);
   window.crypto.getRandomValues(array);
@@ -28,7 +30,7 @@ export async function pkceChallengeFromVerifier(verifier: string) {
   return base64urlencode(hashed);
 }
 
-export function parseJwt(token: string): object {
+export function parseJwt(token: string): User {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {

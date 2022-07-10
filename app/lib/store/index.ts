@@ -1,12 +1,8 @@
-import { actions } from "./actions";
 import { reducers } from "./reducers";
-import { state } from "./state";
+import { initialState } from "./state";
 import { Store } from "./store";
 
 export * from "./model";
-export { Store } from "./store";
-export const store = new Store({
-  actions,
-  reducers,
-  state
-});
+export * from "./actions";
+export { Store, EventsTypes } from "./store";
+export const store = new Store({ reducers, initialState });

@@ -1,6 +1,5 @@
-import { EventsTypes } from "../core";
 import { Device, DevicesData, User } from "./model";
-import { Store } from "./store";
+import { EventsTypes } from "./store";
 
 export enum ActionTypes {
   Navigate = 'navigate',
@@ -9,17 +8,43 @@ export enum ActionTypes {
   Query = 'query',
 }
 
-export const actions = {
-  [ActionTypes.Navigate](context: Store, payload: string, eventType: EventsTypes) {
-    context.commit(ActionTypes.Navigate, payload, eventType);
-  },
-  [ActionTypes.SetUser](context: Store, payload: User, eventType: EventsTypes) {
-    context.commit(ActionTypes.SetUser, payload, eventType);
-  },
-  [ActionTypes.SyncDevices](context: Store, payload: Device[], eventType: EventsTypes) {
-    context.commit(ActionTypes.SyncDevices, payload, eventType);
-  },
-  [ActionTypes.Query](context: Store, payload: DevicesData, eventType: EventsTypes) {
-    context.commit(ActionTypes.Query, payload, eventType);
-  },
+export type Action<T> = {
+  type: ActionTypes;
+  payload: {
+    data: T;
+    eventType: EventsTypes;
+  }
 };
+
+export const navigateAction = (actionPayload: string): Action<string> => ({
+  type: ActionTypes.Navigate,
+  payload: {
+    data: actionPayload,
+    eventType: EventsTypes.RouteChange
+  }
+});
+
+export const setUserAction = (actionPayload: User): Action<User> => ({
+  type: ActionTypes.SetUser,
+  payload: {
+    data: actionPayload,
+    eventType: EventsTypes.StateChange
+  }
+});
+
+export const syncDevicesAction = (actionPayload: Device[]): Action<Device[]> => ({
+  type: ActionTypes.SyncDevices,
+  payload: {
+    data: actionPayload,
+    eventType: EventsTypes.StateChange
+  }
+});
+
+export const queryAction = (actionPayload: DevicesData): Action<DevicesData> => ({
+  type: ActionTypes.Query,
+  payload: {
+    data: actionPayload,
+    eventType: EventsTypes.StateChange
+  }
+});
+

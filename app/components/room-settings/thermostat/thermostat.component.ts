@@ -1,5 +1,4 @@
-import { BaseComponent, Device, DeviceType, Store, apiService } from "../../../lib";
-import { ActionTypes } from "../../../lib/store/actions";
+import { BaseComponent, Device, DeviceType, Store, apiService, queryAction } from "../../../lib";
 import styles from "./_thermostat.component.scss";
 
 export class ThermostatComponent extends BaseComponent {
@@ -21,7 +20,7 @@ export class ThermostatComponent extends BaseComponent {
     this.innerHTML = this.loading();
 
     const { devices } = await apiService.query([{ id: this.thermostat.id }]);
-    this.store.dispatch(ActionTypes.Query, devices);
+    this.store.dispatch(queryAction(devices));
 
     this.innerHTML = this.render();
   }

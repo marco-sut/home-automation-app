@@ -1,6 +1,4 @@
-import { store } from "../store";
-import { ActionTypes } from "../store/actions";
-import { EventsTypes } from "./pubsub";
+import { store, navigateAction } from "../store";
 
 const routes = [
   {
@@ -25,9 +23,9 @@ function dispatchNavigationOnRouteChange() {
   const route = routes.find(route => route.path == window.location.pathname);
 
   if (route?.template) {
-    store.dispatch<string>(ActionTypes.Navigate, route.template, EventsTypes.RouteChange);
+    store.dispatch<string>(navigateAction(route.template));
   } else {
-    store.dispatch<string>(ActionTypes.Navigate, '<app-404></app-404>', EventsTypes.RouteChange);
+    store.dispatch<string>(navigateAction('<app-404></app-404>'));
   }
 }
 

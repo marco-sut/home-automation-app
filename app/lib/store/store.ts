@@ -1,31 +1,51 @@
-import { PubSub, EventsTypes } from "../core/pubsub";
 import { AppState } from "./state";
-import { ActionTypes } from "./actions";
-import { AppStateEvent } from "./reducers";
+import { Action } from "./actions";
+
+export enum EventsTypes {
+  StateChange = 'stateChange',
+  RouteChange = 'routeChange',
+}
 
 export class Store {
-  private actions = {};
   private reducers = {};
-  private events = new PubSub();
+  private events = {};
 
   state: AppState;
 
-  constructor({ actions, reducers, state }) {
-    this.actions = actions;
+  constructor({ reducers, initialState }) {
     this.reducers = reducers;
+    this.state = initialState;
+  }
+
+  private publish(event: EventsTypes, payload = {}) {
+    if (!(event in this.events)) {
+      return [];
+    }
+
+    return this.events[event].forEach((callback: (payload: unknown) => void) => callback(payload));
+  }
+
+  private setState(eventType: EventsTypes, state: AppState) {
     this.state = state;
+    this.publish(eventType, this.state);
   }
 
-  private setState(appStateEvent: AppStateEvent) {
-    this.state = appStateEvent.state;
-    this.events.publish(appStateEvent.eventType, this.state);
+  subscribe(event: EventsTypes, callback: () => void) {
+    if (!(event in this.events)) {
+      this.events[event] = [];
+    }
+
+    return this.events[event].push(callback);
   }
 
-  dispatch<T>(actionKey: ActionTypes, payload: T, eventType?: EventsTypes) {
-    this.actions[actionKey](this, payload, eventType ?? EventsTypes.StateChange);
+  unsubscribe(event: EventsTypes, callback: () => void) {
+    if (event in this.events) {
+      this.events[event] = this.events[event].filter((cb: () => void) => cb !== callback);
+    }
   }
 
-  commit(mutationKey: ActionTypes, payload: unknown, eventType: EventsTypes) {
-    this.setState(this.reducers[mutationKey](this.state, payload, eventType));
+  dispatch<T>(action: Action<T>) {
+    const { type, payload } = action;
+    this.setState(payload.eventType, this.reducers[type](this.state, payload.data));
   }
 }

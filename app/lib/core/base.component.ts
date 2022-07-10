@@ -1,5 +1,4 @@
-import { store } from "../store";
-import { EventsTypes } from "./pubsub";
+import { store, EventsTypes } from "../store";
 
 export abstract class BaseComponent extends HTMLElement {
   protected abstract connectedCallback(): void;
@@ -7,7 +6,7 @@ export abstract class BaseComponent extends HTMLElement {
 
   protected connectToStore(callback?: () => undefined, eventType?: EventsTypes) {
     if (typeof callback !== 'undefined') {
-      store.events.subscribe(eventType ?? EventsTypes.StateChange, () => callback());
+      store.subscribe(eventType ?? EventsTypes.StateChange, callback);
     }
 
     return store;
