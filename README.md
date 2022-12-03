@@ -1,9 +1,6 @@
-# Adobe Home
+# Home automation App - PoC
 <p align="center">
-  <img alt="Adobe" src="https://www.adobe.com/content/dam/cc/icons/Adobe_Experience_Cloud_logo_RGB.svg" width="150">
-</p>
-<p align="center">
-  A tool for home automation
+  A proof of concept for an home automation App
 </p>
 
 - [About](#about)
@@ -12,7 +9,7 @@
 
 ## About
 
-This proof of concept aims to showcase a possible approach for a Home Automation app. I've written this code from scratch, the very most of the code has not been copied from other solutions.
+This proof of concept aims to showcase a possible approach for an Home Automation app. 
 Some features have only been sketched (e.g. loading UI, error message UI) for matter of time. I've put more focus on the big picture rather than implementation details.
 
 ### What technologies have I used for this PoC?
@@ -66,7 +63,7 @@ npm start
 ## <div id="how-it-works">How It Works ( Concepts )</div>
 
 The overall idea is to have our application communicating with a central hub service in the cloud where our application and our home hardware devices are connected to and can talk through that to each other.
-In my concept this hub in the cloud can be reached via this endpoint: https://adobe.home-central-hub.com/v1 and it exposes three endpoint  `sync` `query` and `execute`.
+In my concept this hub in the cloud can be reached via this imaginary endpoint: https://adobe.home-central-hub.com/v1 and it exposes three endpoint  `sync` `query` and `execute`.
 
 ### Assumptions
 For my demo I've made the assumption that my devices/rooms were already created/added to the cloud central hub.
